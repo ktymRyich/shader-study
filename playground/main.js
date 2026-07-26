@@ -1,5 +1,6 @@
 import { PRESETS } from './presets.js'
 import { BASICS, FUNCTIONS, EXTERNAL_LINKS } from './reference.js'
+import { createAudioEngine } from './audio.js'
 
 const canvas = document.getElementById('glcanvas')
 const editor = document.getElementById('editor')
@@ -75,6 +76,9 @@ function useProgram(prog) {
     uTime: gl.getUniformLocation(program, 'uTime'),
     uResolution: gl.getUniformLocation(program, 'uResolution'),
     uMouse: gl.getUniformLocation(program, 'uMouse'),
+    uBass: gl.getUniformLocation(program, 'uBass'),
+    uMid: gl.getUniformLocation(program, 'uMid'),
+    uTreble: gl.getUniformLocation(program, 'uTreble'),
   }
 }
 
@@ -116,13 +120,25 @@ function resize() {
   }
 }
 
+// 音量値は生のまま使うとガタつくので、前フレームとの線形補間でスムージングする (06 README 参照)
+const bands = { bass: 0, mid: 0, treble: 0 }
+
 function tick() {
   resize()
+  if (audio.running) {
+    const raw = audio.getBands()
+    bands.bass += (raw.bass - bands.bass) * 0.15
+    bands.mid += (raw.mid - bands.mid) * 0.15
+    bands.treble += (raw.treble - bands.treble) * 0.15
+  }
   if (program) {
     const t = (performance.now() - startTime) / 1000
     if (uniformLoc.uTime) gl.uniform1f(uniformLoc.uTime, t)
     if (uniformLoc.uResolution) gl.uniform2f(uniformLoc.uResolution, canvas.width, canvas.height)
     if (uniformLoc.uMouse) gl.uniform2f(uniformLoc.uMouse, mouse.x, mouse.y)
+    if (uniformLoc.uBass) gl.uniform1f(uniformLoc.uBass, bands.bass)
+    if (uniformLoc.uMid) gl.uniform1f(uniformLoc.uMid, bands.mid)
+    if (uniformLoc.uTreble) gl.uniform1f(uniformLoc.uTreble, bands.treble)
     gl.drawArrays(gl.TRIANGLES, 0, 3)
   }
   requestAnimationFrame(tick)
@@ -209,6 +225,24 @@ if (lastPreset && PRESETS.some((p) => p.id === lastPreset)) {
 }
 presetSelect.addEventListener('change', () => {
   localStorage.setItem(STORAGE_PREFIX + 'last', presetSelect.value)
+})
+
+// ---- 音 (06 オーディオリアクティブ用) ----
+
+const audio = createAudioEngine()
+const audioBtn = document.getElementById('audio-btn')
+
+audioBtn.addEventListener('click', () => {
+  if (audio.running) {
+    audio.stop()
+    bands.bass = bands.mid = bands.treble = 0
+    audioBtn.textContent = '♪ 音 OFF'
+    audioBtn.setAttribute('aria-pressed', 'false')
+  } else {
+    audio.start() // iPad はユーザー操作 (このクリック) の中でしか AudioContext を開始できない
+    audioBtn.textContent = '♪ 音 ON'
+    audioBtn.setAttribute('aria-pressed', 'true')
+  }
 })
 
 // ---- 関数リファレンスパネル ----

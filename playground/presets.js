@@ -11,6 +11,9 @@ varying vec2 vUv;
 uniform float uTime;
 uniform vec2 uResolution;
 uniform vec2 uMouse;
+uniform float uBass;   // ♪ 音 ON のとき 0〜1 (低域)
+uniform float uMid;    // ♪ 音 ON のとき 0〜1 (中域)
+uniform float uTreble; // ♪ 音 ON のとき 0〜1 (高域)
 `
 
 // Ashima Arts / Stefan Gustavson の 2D simplex noise (MIT)
@@ -174,6 +177,41 @@ void main() {
   //     float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);
   //     return mix(b, a, h) - k * h * (1.0 - h);
   //   }
+
+  gl_FragColor = vec4(color, 1.0);
+}
+`,
+  },
+  {
+    id: '06-audio',
+    label: '06 オーディオリアクティブ',
+    code: HEADER + SIMPLEX_2D + `
+// ヘッダーの「♪ 音 OFF」ボタンを押して音を鳴らすと、
+// uBass / uMid / uTreble (各 0〜1) に周波数帯ごとの音量が流れ込んでくる。
+// 値は既にスムージング済み (06 README の「生の値はガタつく」対策)
+
+void main() {
+  vec2 p = vUv * 3.0;
+
+  // 低域: 模様全体をゆっくり脈動させる
+  float n = snoise(p + uTime * 0.15);
+  n = 0.5 + 0.5 * n;
+  n += uBass * 0.6;
+
+  // 中域: 色相のブレンドに
+  vec3 deep = vec3(0.01, 0.05, 0.12);
+  vec3 glow = vec3(0.3, 0.8, 0.75);
+  vec3 accent = vec3(0.9, 0.5, 0.7);
+  vec3 color = mix(deep, glow, clamp(n, 0.0, 1.0));
+  color = mix(color, accent, uMid * 0.5);
+
+  // 高域: 細かいきらめき
+  float sparkle = step(0.97 - uTreble * 0.1, snoise(p * 30.0 + uTime));
+  color += sparkle * uTreble;
+
+  // 課題1: uBass をノイズのスケール (p の倍率) に効かせてみる
+  // 課題2: 「音に反応する円」を作る (半径を uBass にする)
+  // 課題3: スムージングなしの見た目を想像し、なぜ必要か README で確認する
 
   gl_FragColor = vec4(color, 1.0);
 }

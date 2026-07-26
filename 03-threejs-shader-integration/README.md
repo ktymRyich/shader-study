@@ -1,5 +1,7 @@
 # 03 - three.js シェーダー統合
 
+> **iPad でやる場合**: [3D Playground](https://ktymryich.github.io/shader-study/playground3d/) のプリセット「03 波打つ平面」(課題1) と「03 attribute (aRandom)」(課題2) が使える。vertex / fragment をタブで切り替えて編集する。課題3 (EffectComposer) と課題4 (lil-gui) だけは PC で。
+
 ## 目標
 
 `ShaderMaterial` を使いこなし、頂点シェーダー側で形状そのものを変形できるようになる (fragment shader = 色、vertex shader = 形、という分業の理解)。

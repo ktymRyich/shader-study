@@ -1,5 +1,7 @@
 # 06 - オーディオリアクティブ
 
+> **iPad でやる場合**: [Playground](https://ktymryich.github.io/shader-study/playground/) のプリセット「06 オーディオリアクティブ」+ ヘッダーの「♪ 音」ボタンで、FFT → uniform (uBass/uMid/uTreble) の流れを体験できる (内蔵シンセ、スムージング済み)。ただし AnalyserNode の配線を自分で書くこと自体がこのモジュールの課題 1〜2 なので、それは PC でやる。
+
 ## 目標
 
 音楽の音量/周波数帯をシェーダーの uniform に流し込み、パーティクルや色が音に合わせて脈動するようにする (Tetris Effect / いのちめぐる冒険の設計思想の核)。

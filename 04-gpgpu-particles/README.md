@@ -1,5 +1,7 @@
 # 04 - GPGPU パーティクル (Flow Field)
 
+> **iPad でやる場合**: [3D Playground](https://ktymryich.github.io/shader-study/playground3d/) のプリセット「04 入門: 頂点パーティクル」で flow field・gl_PointSize・加算合成の感覚を掴める。ただしこれは状態を持たない簡易版 — 本物のピンポン (GPGPU) の実装は PC でやる (このモジュールの本体)。
+
 ## 目標
 
 最終作品のビジュアルの核。数万〜数十万のパーティクルを GPU 上でシミュレートし、flow field (ノイズの勾配) に沿って漂わせる。

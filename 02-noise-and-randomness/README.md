@@ -1,5 +1,7 @@
 # 02 - ノイズと乱数
 
+> **iPad でやる場合**: [Playground](https://ktymryich.github.io/shader-study/playground/) のプリセット「02 ノイズ (simplex入り)」で課題がすべてできる (snoise は貼り込み済み)。
+
 ## 目標
 
 `random()` → Perlin/Simplex noise → fBm (fractal Brownian motion) の積み上げを理解する。最終作品の「海・宇宙の揺らぎ」表現の土台。

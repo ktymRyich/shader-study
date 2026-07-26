@@ -41,7 +41,9 @@
 
 このリポジトリは GitHub Pages で公開されている: **https://ktymryich.github.io/shader-study/**
 
-- **[Shader Playground](https://ktymryich.github.io/shader-study/playground/)** — ブラウザ内エディタで fragment shader を書いて即実行。00/01/02/05 のプリセット入り。出先学習のメイン
+- **[Shader Playground](https://ktymryich.github.io/shader-study/playground/)** — ブラウザ内エディタで fragment shader を書いて即実行。00/01/02/05/06 のプリセット入り。出先学習のメイン
+- **[3D Playground](https://ktymryich.github.io/shader-study/playground3d/)** — vertex + fragment 両方を編集できる three.js 版 (03/04 用)。分割済み平面・点群 (加算合成)・aRandom attribute・カメラ回転付き
+- **モジュール別の iPad 対応表はトップページにある**。まとめ: 01/02/05/06 は Playground で課題完結、03/04 は 3D Playground で大半可 (EffectComposer / lil-gui / 本物の GPGPU ピンポンは PC)、07 のみ実機必須で不可
   - 編集内容は端末の localStorage に自動保存される (端末をまたいでは同期されない)
   - 「関数リファレンス」ボタンで GLSL 組み込み関数一覧 (引数・戻り値の型付き) と swizzle などの前提知識をポップアップ表示できる。検索可
   - コンパイルエラーは画面下部に行番号付きで出る (`ERROR: 0:12:` の 12 がエディタの行番号)

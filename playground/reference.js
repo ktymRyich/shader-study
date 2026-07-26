@@ -20,7 +20,7 @@ export const BASICS = [
   },
   {
     title: 'この Playground で使える変数',
-    body: 'vUv (vec2, 0〜1 の画面座標・左下原点) / uTime (float, 経過秒) / uResolution (vec2, 画面ピクセル) / uMouse (vec2, 0〜1) / gl_FragColor (vec4, 出力する色。最後に必ず代入する)',
+    body: 'vUv (vec2, 0〜1 の画面座標・左下原点) / uTime (float, 経過秒) / uResolution (vec2, 画面ピクセル) / uMouse (vec2, 0〜1) / uBass, uMid, uTreble (float, ♪ 音 ON のとき各帯域の音量 0〜1) / gl_FragColor (vec4, 出力する色。最後に必ず代入する)',
   },
 ]
 

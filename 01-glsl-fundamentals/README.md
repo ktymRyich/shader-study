@@ -1,5 +1,7 @@
 # 01 - GLSL 基礎文法
 
+> **iPad でやる場合**: [Playground](https://ktymryich.github.io/shader-study/playground/) のプリセット「01 図形の練習」で課題 1〜4 がすべてできる。下記の「main.js を自分で配線する」練習だけは PC に戻ったときに。
+
 ## 目標
 
 GLSL の型・関数・shaping functions を使って、コードだけで図形やパターンを描けるようになる。

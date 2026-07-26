@@ -29,14 +29,35 @@
     <h2>iPad / 出先での学習</h2>
     <a class="card" href="./playground/">
       <strong>Shader Playground</strong>
-      <span>ブラウザ内エディタで fragment shader を書いて即実行。00/01/02/05 のプリセット入り。編集内容は端末に自動保存される</span>
+      <span>fragment shader をその場で書いて実行。00 / 01 / 02 / 05 / 06 のプリセット入り。06 は「♪ 音」ボタンで内蔵シンセが鳴り uBass/uMid/uTreble が使える。編集内容は端末に自動保存</span>
     </a>
+    <a class="card" href="./playground3d/">
+      <strong>3D Playground</strong>
+      <span>vertex + fragment を両方編集できる three.js 版。分割済み平面と点群を切替可。03 (頂点変位・attribute) / 04 入門 (頂点パーティクル) のプリセット入り。ドラッグでカメラ回転</span>
+    </a>
+
+    <h2>モジュールごとの進め方 (iPad)</h2>
+    <p class="note">課題文 (README) は GitHub 上で読み、演習は Playground で行う。</p>
+    <a class="card" href="https://github.com/ktymRyich/shader-study/blob/main/01-glsl-fundamentals/README.md">
+      <strong>01 GLSL 基礎文法</strong><span>読む: README / やる: Playground「01 図形の練習」</span></a>
+    <a class="card" href="https://github.com/ktymRyich/shader-study/blob/main/02-noise-and-randomness/README.md">
+      <strong>02 ノイズと乱数</strong><span>読む: README / やる: Playground「02 ノイズ」</span></a>
+    <a class="card" href="https://github.com/ktymRyich/shader-study/blob/main/03-threejs-shader-integration/README.md">
+      <strong>03 three.js シェーダー統合</strong><span>読む: README / やる: 3D Playground「03 波打つ平面」「03 attribute」。EffectComposer と lil-gui の課題のみ PC</span></a>
+    <a class="card" href="https://github.com/ktymRyich/shader-study/blob/main/04-gpgpu-particles/README.md">
+      <strong>04 GPGPU パーティクル</strong><span>読む: README / やる: 3D Playground「04 入門」で感覚を掴む。本物のピンポン (GPGPU) は PC で</span></a>
+    <a class="card" href="https://github.com/ktymRyich/shader-study/blob/main/05-raymarching-sdf/README.md">
+      <strong>05 Raymarching / SDF</strong><span>読む: README / やる: Playground「05 raymarching 入門」</span></a>
+    <a class="card" href="https://github.com/ktymRyich/shader-study/blob/main/06-audio-reactive/README.md">
+      <strong>06 オーディオリアクティブ</strong><span>読む: README / やる: Playground「06 オーディオリアクティブ」(♪ 音 ON で)</span></a>
+    <a class="card" href="https://github.com/ktymRyich/shader-study/blob/main/07-webxr-integration/README.md">
+      <strong>07 WebXR 統合</strong><span>Quest 3 実機が要るため PC 専用。iPad では README を読むまで</span></a>
 
     <h2>モジュールのデモ</h2>
     <a class="card" href="./00-hello-shader/">
       <strong>00 - Hello Shader</strong>
       <span>uniform / varying の配線を確認する最初のデモ</span>
     </a>
-    <p class="note">01 以降のモジュールは「自分で配線を書く」課題のため、完成したものからここに追加していく。</p>
+    <p class="note">01 以降で PC 側に作った成果物デモは、完成したものからここに追加していく。</p>
   </body>
 </html>

@@ -1,5 +1,7 @@
 # 05 - Raymarching / SDF
 
+> **iPad でやる場合**: [Playground](https://ktymryich.github.io/shader-study/playground/) のプリセット「05 raymarching 入門」で課題 1〜3 ができる (smin のコードもコメントに用意済み)。
+
 ## 目標
 
 Signed Distance Function (SDF) と raymarching を理解し、ポリゴンを使わないボリューム表現 (霧、抽象的な空間、有機的な形) を作れるようになる。「宇宙・深海のような広さ」の演出に効く。

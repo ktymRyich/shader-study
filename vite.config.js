@@ -17,7 +17,8 @@ export default defineConfig({
       input: {
         index: page('index.html'),
         'hello-shader': page('00-hello-shader/index.html'),
-        playground: page('playground/index.html')
+        playground: page('playground/index.html'),
+        playground3d: page('playground3d/index.html')
       }
     }
   }
