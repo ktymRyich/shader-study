@@ -37,6 +37,17 @@
 3. 詰まったら答えを見る前に 15分は自分で試行錯誤する。Book of Shaders は「エディタでいじって壊してみる」ことを前提にした教材なので、写経で終わらせない
 4. 週1回、`wiki/projects/vr-installation/vr-installation.md` の進捗を更新する (Claude に頼めば追記してくれる)
 
+## iPad / 出先での学習
+
+このリポジトリは GitHub Pages で公開されている: **https://ktymryich.github.io/shader-study/**
+
+- **[Shader Playground](https://ktymryich.github.io/shader-study/playground/)** — ブラウザ内エディタで fragment shader を書いて即実行。00/01/02/05 のプリセット入り。出先学習のメイン
+  - 編集内容は端末の localStorage に自動保存される (端末をまたいでは同期されない)
+  - 「関数リファレンス」ボタンで GLSL 組み込み関数一覧 (引数・戻り値の型付き) と swizzle などの前提知識をポップアップ表示できる。検索可
+  - コンパイルエラーは画面下部に行番号付きで出る (`ERROR: 0:12:` の 12 がエディタの行番号)
+- モジュールのデモページも同 URL 配下で見られる (トップページに一覧)
+- **更新フロー**: PC で main に push すると GitHub Actions が自動ビルド・公開する (約1分)。iPad からリポジトリのコードを編集したい場合は github.dev (リポジトリページで `.` キー) → commit で同じフローに乗る
+
 ## 開発環境の起動
 
 ```bash
