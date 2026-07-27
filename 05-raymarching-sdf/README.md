@@ -34,6 +34,10 @@ Signed Distance Function (SDF) と raymarching を理解し、ポリゴンを使
 3. 霧・ボリューメトリックライトっぽい効果を、レイの通過距離を使って表現する
 4. 04 のパーティクルと組み合わせて、パーティクルの向こうにうっすら光るボリュームがある、といった重ね合わせを試す
 
+## 発展課題: 作品リーディング
+
+[Playground](https://ktymryich.github.io/shader-study/playground/) のプリセット「作品リーディング: Reef」に、X で共有されていた golfed shader (1ループのサンゴ礁作品) を読める形に展開したものが入っている。02 の fBm 構造 + 05 の raymarching + sin パレット + ボリューメトリックグローが 1 本に詰まった総合演習。プリセット内の課題 1〜4 をやると、上級者の省略記法 (twigl 記法) を解読する力もつく。
+
 ## 完了したら
 
 `06-audio-reactive/` へ。

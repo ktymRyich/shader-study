@@ -218,6 +218,71 @@ void main() {
 `,
   },
   {
+    id: 'reading-reef',
+    label: '作品リーディング: Reef',
+    code: HEADER + `
+// ============================================================
+// 作品リーディング: "Reef" — X (Twitter) で共有されていた golfed shader
+// (twigl 記法の 1 ループ作品を、読めるように展開したもの。原文は末尾)
+// 02 の fBm + 05 の raymarching + sin パレットの総合演習
+// ============================================================
+
+// tanh は WebGL1 (GLSL ES 1.0) に無いので自作する。
+// 「無限に増えうる明るさを 0〜1 に押し込む」トーンマッピング
+vec4 tanh4(vec4 x) {
+  vec4 e = exp(clamp(2.0 * x, -20.0, 20.0));
+  return (e - 1.0) / (e + 1.0);
+}
+
+void main() {
+  // レイの方向 (原文: normalize(FC.rgb*2.-r.xyx))
+  // 画面中央から奥 (-z) に向かうレイを、ピクセルごとに少しずつ傾ける
+  vec3 dir = normalize(vec3(gl_FragCoord.xy * 2.0 - uResolution.xy, -uResolution.x));
+
+  vec4 col = vec4(0.0); // 光の蓄積バッファ (原文の o)
+  float z = 0.0;        // レイが進んだ距離
+
+  // 外ループ: raymarching (05 の基本ループと同じ骨格。50 歩進む)
+  for (float i = 1.0; i <= 50.0; i++) {
+    vec3 p = z * dir; // 現在のレイ位置
+
+    // 内ループ: sin による乱流 (02 の fBm と同じ「周波数↑・振幅↓で重ねる」構造)
+    // p 自身を入力にした sin で p を歪める、を 9 回重ねてサンゴ礁のうねりを作る
+    for (float k = 1.0; k < 10.0; k++) {
+      p += 0.4 * sin(p.yzx * k - z + uTime + i) / k + 0.5;
+    }
+
+    // 疑似 SDF: 「うねった水平面」までのだいたいの距離 (05 の map() に相当)
+    // 遠く (z 大) ほど分母が大きい = 歩幅が伸びる LOD 的な工夫
+    float d = length(vec4(abs(p.y + p.z * 0.5), sin(p - z) / 7.0))
+              / (4.0 + z * z / 100.0);
+
+    z += d; // SDF の値ぶん安全に進む (raymarching の心臓部)
+
+    // 光の蓄積: 表面に近い (d が小さい) ほど 1/d^2 で強く光る = ボリューメトリックグロー
+    // sin(i*0.1 - vec4(6,1,2,0)) は RGB の位相をずらした虹色パレット (sin パレット)
+    col += (0.9 + sin(i * 0.1 - vec4(6.0, 1.0, 2.0, 0.0))) / d / d / z
+         + d * z / vec4(4.0, 2.0, 1.0, 0.0); // 遠景のフォグ色
+  }
+
+  // 課題1: 内ループの回数 (10.0) を 2 や 5 に減らして、うねりの複雑さの出どころを確認する
+  // 課題2: sin パレットの vec4(6,1,2,0) を変えて配色を作り変える
+  // 課題3: abs(p.y + p.z*0.5) の係数を変えて「面」の傾きを変えてみる
+  // 課題4: 原文 (下) と 1 行ずつ突き合わせて、省略記法を解読する
+
+  gl_FragColor = tanh4(col / 2000.0);
+  gl_FragColor.a = 1.0;
+}
+
+// ---- 原文 (twigl 記法: FC=gl_FragCoord, r=resolution, t=time, o=出力) ----
+// for(float z,d,i;i++<5e1;z+=d,o+=(.9+sin(i*.1-vec4(6,1,2,0)))/d/d/z+d*z/vec4(4,2,1,0)){
+//   vec3 p=z*normalize(FC.rgb*2.-r.xyx);
+//   for(d=0.;d++<9.;)p+=.4*sin(p.yzx*d-z+t+i)/d+.5;
+//   d=length(vec4(abs(p.y+p.z*.5),sin(p-z)/7.))/(4.+z*z/1e2);}
+// o=tanh(o/2e3);
+`,
+  },
+  {
     id: 'blank',
     label: '白紙',
     code: HEADER + `
